@@ -1,0 +1,81 @@
+<!-- <table class="rwd-table">
+    <th>First Name</th> <th>Last name</th> <th>Company</th> <th>Email</th> <th>Eye Colour</th> <th>Primary Phone</th>
+    <th>Balance</th> <th>Is Active</th>
+    <tr *ngFor="let data of employeeData">
+    <td>{{ data.name.first | uppercase }}</td>
+    <td>{{ data.name.last}}</td> 
+    <td>{{ data.company}}</td>
+    <td>{{ data.email }}</td> 
+    <td>{{ data.eyeColor }}</td> 
+    <td>{{ data.contactnumber[0].phone}}</td>
+    <td>{{ data.balance }}</td>
+    <td>{{ data.isActive }}</td> 
+     
+     
+    </tr>
+    </table> -->
+    
+
+<div>  
+  <div class="container">
+    <div class="text-center">
+      <!-- <form>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+                <input type="text" class="form-control" name="searchString"
+                    placeholder="Type to search..." [(ngModel)]="searchString">
+            </div>
+        </div>
+    </form> -->
+    <nav class="navbar">
+      <input class="form-control" type="text" name="search" [(ngModel)]="filter" style="width:900px; float:left;">      
+    </nav>
+        
+      <!-- items being paged -->
+      <!-- <div *ngFor="let item of pagedItems">{{item.name}}</div> -->
+      <table class="rwd-table">
+        <th>First Name</th>
+        <th>Last name</th>
+        <th>Company</th>
+        <th>Email</th>
+        <th>Eye Colour</th>
+        <th>Primary Phone</th>
+        <th>Balance</th>
+        <th>Is Active</th>
+        <tr *ngFor="let data of pagedItems | filter :filter; let i = index">
+            <!-- <tr *ngFor="let data of pagedItems | filter : 'company' : searchString; let i = index"> -->
+          <td>{{ data.name.first }}</td>
+          <td>{{ data.name.last}}</td>
+          <td>{{ data.company}}</td>
+          <td>{{ data.email }}</td>
+          <td>{{ data.eyeColor }}</td>
+          <td>{{ data.contactnumber[0].phone}}</td>
+          <td>{{ data.balance }}</td>
+          <td>{{ data.isActive }}</td>
+          <td><button type="button" class="btn btn-primary" (click)="viewProfile(data)">view profile</button></td>
+
+        </tr>
+      </table>
+
+      <!-- pager -->
+      <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+        <li [ngClass]="{disabled:pager.currentPage === 1}">
+          <a (click)="setPage(1)">First</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === 1}">
+          <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+        </li>
+        <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+          <a (click)="setPage(page)">{{page}}</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+          <a (click)="setPage(pager.currentPage + 1)">Next</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+          <a (click)="setPage(pager.totalPages)">Last</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
